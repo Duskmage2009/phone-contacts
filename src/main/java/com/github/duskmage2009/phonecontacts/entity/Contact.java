@@ -29,4 +29,5 @@ public class Contact {
         phoneNumbers.forEach(phoneNumber -> phoneNumber.setContact(this));
         this.phoneNumbers = phoneNumbers;
     }
+
 }

@@ -10,6 +10,6 @@ import java.util.List;
 public class ContactResponseDTO {
     Long id;
     String name;
-    List<EmailDTO> emailDTOS;
-    List<PhoneNumberDTO> phoneNumberDTOS;
+    List<EmailResponseDTO> emailDTOS;
+    List<PhoneNumberResponseDTO> phoneNumberDTOS;
 }
