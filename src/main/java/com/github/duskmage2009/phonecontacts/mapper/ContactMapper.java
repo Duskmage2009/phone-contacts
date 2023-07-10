@@ -76,6 +76,7 @@ public class ContactMapper {
                 }).toList();
 
         Contact contact = new Contact();
+        contact.setId(contactResponseDTO.getId());
         contact.setName(contactResponseDTO.getName());
         contact.setEmails(emails);
         contact.setPhoneNumbers(phoneNumbers);

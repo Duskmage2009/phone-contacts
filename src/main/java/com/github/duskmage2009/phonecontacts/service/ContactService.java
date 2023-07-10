@@ -21,7 +21,6 @@ public class ContactService {
         this.contactRepository = contactRepository;
         this.contactMapper = contactMapper;
     }
-
     public List<ContactResponseDTO> getListDTO() {
 //        List<Contact> contacts= contactRepository.findAll();
 //        List<ContactResponseDTO> list = new ArrayList<>();
