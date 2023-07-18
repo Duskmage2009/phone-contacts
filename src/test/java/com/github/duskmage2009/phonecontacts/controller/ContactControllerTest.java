@@ -125,4 +125,48 @@ class ContactControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
-}
+    @Test
+    void testValidPutStatusIsOk() throws Exception {
+        emailResponseDTO = new EmailResponseDTO();
+        emailResponseDTO.setEmail("Jenny@gmail.com");
+        emailResponseDTO.setId(1L);
+        List<EmailResponseDTO> emailResponseDTOList = new ArrayList<>();
+        emailResponseDTOList.add(emailResponseDTO);
+
+
+        phoneNumberResponseDTO = new PhoneNumberResponseDTO();
+        phoneNumberResponseDTO.setPhone("1111");
+        phoneNumberResponseDTO.setId(1L);
+        List<PhoneNumberResponseDTO> phoneNumberResponseDTOS = new ArrayList<>();
+        phoneNumberResponseDTOS.add(phoneNumberResponseDTO);
+        contactResponseDTO = new ContactResponseDTO();
+        contactResponseDTO.setName("Jenny");
+        contactResponseDTO.setId(5l);
+        contactResponseDTO.setEmailDTOS(emailResponseDTOList);
+        contactResponseDTO.setPhoneNumberDTOS(phoneNumberResponseDTOS);
+
+        emailDTO = new EmailDTO();
+        emailDTO.setEmail("Jenny@gmail.com");
+        phoneNumberDTO = new PhoneNumberDTO();
+        phoneNumberDTO.setPhone("1111");
+        List<EmailDTO> emailDTOS = new ArrayList<>();
+        emailDTOS.add(emailDTO);
+        List<PhoneNumberDTO> phoneNumberDTOS = new ArrayList<>();
+        phoneNumberDTOS.add(phoneNumberDTO);
+
+        contactRequestDTO = new ContactRequestDTO();
+        contactRequestDTO.setName("Jenny");
+        contactRequestDTO.setEmailDTOS(emailDTOS);
+        contactRequestDTO.setPhoneNumberDTOS(phoneNumberDTOS);
+        Mockito.when(contactService.update(Mockito.anyLong(),Mockito.any())).thenReturn(contactResponseDTO);
+
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/contacts/1")
+                        .content(objectMapper.writeValueAsString(contactRequestDTO))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    }
